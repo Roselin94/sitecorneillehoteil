@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getActiveSettings, DATA_UPDATED_EVENT } from '../services/dataService';
+import { API_BASE_URL } from '../services/apiConfig';
 import { Phone, Mail, MapPin, MessageSquare, Clock, Send, CheckCircle2 } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
@@ -30,7 +31,7 @@ export const ContactPage: React.FC = () => {
     setLoading(true);
 
     try {
-      await fetch('http://localhost:5000/api/contact', {
+      await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName, email, phone, subject, message }),

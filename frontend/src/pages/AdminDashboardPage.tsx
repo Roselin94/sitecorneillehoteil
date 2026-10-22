@@ -13,6 +13,7 @@ import {
   saveActiveReservations,
   DATA_UPDATED_EVENT
 } from '../services/dataService';
+import { API_BASE_URL } from '../services/apiConfig';
 import {
   Calendar, Bed, Wine, MessageSquare, LogOut, Check, X, Ban,
   Plus, Trash2, Edit3, Save, MapPin, Upload
@@ -103,7 +104,7 @@ export const AdminDashboardPage: React.FC = () => {
     window.addEventListener('storage', refreshAllData);
 
     // Essayer également de charger depuis le backend si le serveur tourne
-    fetch('http://localhost:5000/api/admin/reservations', {
+    fetch(`${API_BASE_URL}/api/admin/reservations`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.ok ? res.json() : null)

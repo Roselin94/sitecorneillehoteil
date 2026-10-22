@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Calendar, Clock, AlertCircle, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { getActiveRooms, getActiveSettings, addReservation, DATA_UPDATED_EVENT } from '../services/dataService';
+import { API_BASE_URL } from '../services/apiConfig';
 import type { ReservationRequest } from '../types';
 
 export const ReservationPage: React.FC = () => {
@@ -113,7 +114,7 @@ export const ReservationPage: React.FC = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/reservations', {
+      const res = await fetch(`${API_BASE_URL}/api/reservations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
