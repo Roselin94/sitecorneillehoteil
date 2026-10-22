@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-navy-dark: #040810;
+    --color-navy: #081120;
+    --color-navy-light: #0f1d36;
+    --color-gold: #c5a059;
+    --color-gold-light: #e5c583;
+    --color-gold-dark: #8c6a29;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 13.5px;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #040810;
+    color: #e2e8f0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.45;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Cinzel', Georgia, serif;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+}
+
+/* Gradients Dorés Somptueux & Effets Métalliques */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fce5b5 0%, #e2be75 30%, #c5a059 65%, #8c6a29 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #f0d59a 0%, #d4b16a 35%, #b89146 100%);
+  color: #040810;
+  box-shadow: 0 4px 20px rgba(197, 160, 89, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-gradient-bg:hover {
+  background: linear-gradient(135deg, #fae2ad 0%, #e0bd75 35%, #c59f51 100%);
+  box-shadow: 0 6px 28px rgba(197, 160, 89, 0.45);
+  transform: translateY(-1px);
+}
+
+.gold-border {
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  box-shadow: 0 0 25px rgba(197, 160, 89, 0.15);
+}
+
+.navy-card {
+  background: linear-gradient(165deg, rgba(15, 29, 54, 0.7) 0%, rgba(8, 17, 32, 0.95) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.navy-card:hover {
+  border-color: rgba(197, 160, 89, 0.5);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 160, 89, 0.18);
+}
+
+/* Lignes décoratives luxueuses */
+.ornament-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ornament-line::before,
+.ornament-line::after {
+  content: '';
+  height: 1px;
+  width: 45px;
+  background: linear-gradient(90deg, transparent, #c5a059);
+}
+
+.ornament-line::after {
+  background: linear-gradient(90deg, #c5a059, transparent);
+}

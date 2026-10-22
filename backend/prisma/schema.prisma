@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Hash bcrypt
+  fullName  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Room {
+  id                String        @id @default(uuid())
+  name              String
+  slug              String        @unique
+  category          String        // Standard, Supérieure, Suite Deluxe, Suite Exécutive
+  pricePerNight     Int           // En FCFA (XAF)
+  capacityAdults    Int           @default(2)
+  capacityChildren  Int           @default(0)
+  sizeM2            Int           @default(25)
+  bedType           String
+  shortDescription  String        @db.Text
+  fullDescription   String        @db.Text
+  amenities         String        @db.Text // Liste en JSON stringifié
+  imageUrl          String
+  galleryUrls       String        @db.Text // Liste d'URLs en JSON stringifié
+  isAvailable       Boolean       @default(true)
+  featured          Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  reservations      Reservation[]
+}
+
+model Reservation {
+  id                  String   @id @default(uuid())
+  reference           String   @unique // Ex: CNH-849201
+  roomId              String
+  room                Room     @relation(fields: [roomId], references: [id])
+  checkInDate         DateTime
+  checkOutDate        DateTime
+  adultsCount         Int      @default(1)
+  childrenCount       Int      @default(0)
+  totalNights         Int
+  totalEstimatedPrice Int      // En FCFA (XAF)
+  guestFullName       String
+  guestEmail          String
+  guestPhone          String
+  specialRequests     String?  @db.Text
+  status              String   @default("PENDING") // PENDING, CONFIRMED, REJECTED, CANCELLED
+  confirmedAt         DateTime?
+  rejectionReason     String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([roomId])
+}
+
+model Wine {
+  id           String   @id @default(uuid())
+  name         String
+  category     String   // Vin Rouge, Vin Blanc, Champagne, Spiritueux, Rosé
+  origin       String
+  year         String?
+  price        Int?     // En FCFA (XAF)
+  description  String   @db.Text
+  tastingNotes String   @db.Text
+  imageUrl     String
+  isAvailable  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  fullName  String
+  email     String
+  phone     String?
+  subject   String
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model GalleryImage {
+  id        String   @id @default(uuid())
+  title     String
+  category  String   // Hôtel, Chambres, Cave, Lounge
+  imageUrl  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model SiteSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String   @db.Text
+  description String?
+  updatedAt   DateTime @updatedAt
+}

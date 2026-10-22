@@ -1,0 +1,202 @@
+import type { Room, WineItem, SiteSettings } from '../types';
+
+export const initialSiteSettings: SiteSettings = {
+  name: 'CORNEILLE HÔTEL & CAVE',
+  tagline: "L'élégance hospitalière & l'art de vivre au cœur de Pointe-Noire",
+  city: 'Pointe-Noire',
+  country: 'République du Congo',
+  address: 'Centre-Ville, Pointe-Noire, République du Congo',
+  phone: '+242 06 000 00 00',
+  whatsapp: '+242 06 000 00 00',
+  email: 'contact@corneillehotel.cg',
+  receptionHours: '24h/24 & 7j/7',
+  currency: 'XAF',
+  timezone: 'Africa/Brazzaville',
+};
+
+export const sampleRooms: Room[] = [
+  {
+    id: 'room-1',
+    name: 'Chambre Confort Classique',
+    slug: 'chambre-confort-classique',
+    category: 'Standard',
+    pricePerNight: 45000,
+    capacityAdults: 2,
+    capacityChildren: 1,
+    sizeM2: 26,
+    bedType: 'Lit Queen Size (160x200)',
+    shortDescription: 'Un cocon reposant alliant boiseries nobles, literie haut de gamme et vue paisible.',
+    fullDescription: 'Idéale pour les voyageurs d\'affaires et les couples en séjour à Pointe-Noire, la Chambre Confort Classique offre une atmosphère sereine avec des finitions soignées. Équipée d\'un bureau de travail ergonomique, d\'une climatisation individuelle silencieuse et d\'une salle d\'eau privative contemporaine.',
+    amenities: ['Climatisation individuelle', 'Wi-Fi haut débit par fibre', 'Smart TV HD avec chaînes satellites', 'Coffre-fort électronique', 'Salle de bain avec douche italienne', 'Service en chambre'],
+    imageUrl: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80',
+    galleryUrls: [
+      'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80'
+    ],
+    isAvailable: true,
+    featured: true,
+  },
+  {
+    id: 'room-2',
+    name: 'Chambre Supérieure Privilège',
+    slug: 'chambre-superieure-privilege',
+    category: 'Supérieure',
+    pricePerNight: 65000,
+    capacityAdults: 2,
+    capacityChildren: 1,
+    sizeM2: 34,
+    bedType: 'Lit King Size (180x200)',
+    shortDescription: 'Espace généreux avec coin salon, baies vitrées lumineuses et literie d\'exception.',
+    fullDescription: 'La Chambre Supérieure Privilège réunit modernité et raffinement. Elle propose un espace salon intime propice à la détente, un minibar approvisionné selon vos souhaits ainsi qu\'un accès privilégié à la dégustation de nos sélections de la cave.',
+    amenities: ['Climatisation individuelle', 'Wi-Fi haut débit par fibre', 'Smart TV 55 pouces', 'Mini-bar & machine à café expresso', 'Peignoirs & chaussons velours', 'Baignoire & douche séparées', 'Espace salon'],
+    imageUrl: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+    galleryUrls: [
+      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1000&q=80'
+    ],
+    isAvailable: true,
+    featured: true,
+  },
+  {
+    id: 'room-3',
+    name: 'Suite Corneille Prestige',
+    slug: 'suite-corneille-prestige',
+    category: 'Suite Deluxe',
+    pricePerNight: 110000,
+    capacityAdults: 3,
+    capacityChildren: 2,
+    sizeM2: 55,
+    bedType: 'Lit King Size Imperial + Canapé convertible',
+    shortDescription: 'Le sommet du confort : grand salon privatif, finitions dorées et prestations sur-mesure.',
+    fullDescription: 'Véritable havre de paix haut de gamme, la Suite Corneille Prestige a été pensée pour les séjours mémorables et les réceptions privées. Elle comprend un spacieux salon séparé, une salle de bain en marbre avec baignoire balnéo et un service de conciergerie personnalisé.',
+    amenities: ['Salon privé indépendant', 'Service conciergerie personnalisé', 'Cave à vin privative en suite', 'Bain à remous / Balnéo', 'Wi-Fi très haut débit dédié', 'Petit-déjeuner servi en suite', 'Terrasse ou balcon privé'],
+    imageUrl: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80',
+    galleryUrls: [
+      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1000&q=80'
+    ],
+    isAvailable: true,
+    featured: true,
+  },
+  {
+    id: 'room-4',
+    name: 'Suite Exécutive Diplomatique',
+    slug: 'suite-executive-diplomatique',
+    category: 'Suite Exécutive',
+    pricePerNight: 145000,
+    capacityAdults: 4,
+    capacityChildren: 2,
+    sizeM2: 72,
+    bedType: 'Lit King Size Imperial + Chambre d\'amis attenante',
+    shortDescription: 'Espace d\'exception avec salle de réunion privée, sécurité renforcée et majordome.',
+    fullDescription: 'Conçue pour les délégations officielles, les dirigeants et les séjours de longue durée, la Suite Exécutive combine discrétion, luxe intemporel et technologie de pointe. Vue imprenable, acoustique soignée et salon de travail équipé.',
+    amenities: ['Espace bureau & réunion privée', 'Majordome sur demande', 'Cave à cigares et digestifs raffinés', 'Deux salles de bain privatives', 'Transfert aéroport privé', 'Insonorisation phonique premium'],
+    imageUrl: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+    galleryUrls: [
+      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1000&q=80'
+    ],
+    isAvailable: true,
+    featured: false,
+  }
+];
+
+export const sampleWines: WineItem[] = [
+  {
+    id: 'wine-1',
+    name: 'Château Margaux Premier Grand Cru Classé',
+    category: 'Vin Rouge',
+    origin: 'Bordeaux, France',
+    year: '2016',
+    price: 320000,
+    description: 'Une harmonie parfaite entre puissance aromatique, finesse des tanins et finale d\'une longueur envoûtante.',
+    tastingNotes: 'Notes de mûre sauvage, cassis, violette séchée et boîte à cigare. Boisé fondu et velouté.',
+    imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80',
+    isAvailable: true,
+  },
+  {
+    id: 'wine-2',
+    name: 'Domaine de la Romanée-Conti Échezeaux',
+    category: 'Vin Rouge',
+    origin: 'Bourgogne, France',
+    year: '2018',
+    price: 490000,
+    description: 'Une référence mondiale du Pinot Noir, d\'une pureté cristalline et d\'une complexité minérale remarquable.',
+    tastingNotes: 'Framboise écrasée, épices douces, sous-bois d\'automne et truffe noire délicate.',
+    imageUrl: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=800&q=80',
+    isAvailable: true,
+  },
+  {
+    id: 'wine-3',
+    name: 'Champagne Dom Pérignon Vintage Brut',
+    category: 'Champagne',
+    origin: 'Épernay, Champagne, France',
+    year: '2013',
+    price: 185000,
+    description: 'La quintessence du champagne : effervescence crémeuse, équilibre majestueux entre fraîcheur et maturité.',
+    tastingNotes: 'Fleurs blanches, agrumes confits, brioche grillée et touche fumée saline.',
+    imageUrl: 'https://images.unsplash.com/photo-1569919659476-f0852f6834b7?auto=format&fit=crop&w=800&q=80',
+    isAvailable: true,
+  },
+  {
+    id: 'wine-4',
+    name: 'Meursault Les Charmes 1er Cru',
+    category: 'Vin Blanc',
+    origin: 'Bourgogne, France',
+    year: '2020',
+    price: 125000,
+    description: 'Un grand vin blanc de garde, ample, onctueux et traversé par une tension saline rafraîchissante.',
+    tastingNotes: 'Beurre frais, noisette torréfiée, poire mûre et zeste de yuzu.',
+    imageUrl: 'https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=800&q=80',
+    isAvailable: true,
+  },
+  {
+    id: 'wine-5',
+    name: 'Cognac Hennessy Paradis Rare',
+    category: 'Spiritueux',
+    origin: 'Charente, France',
+    price: 450000,
+    description: 'Assemblage d\'eaux-de-vie exceptionnelles vieillies dans les chais les plus anciens.',
+    tastingNotes: 'Fleurs capiteuses, cardamome, fruits confits et rancio délicat.',
+    imageUrl: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=800&q=80',
+    isAvailable: true,
+  }
+];
+
+export const sampleGallery = [
+  {
+    id: 'gal-1',
+    title: 'Façade et Entrée Principale',
+    category: 'Hôtel',
+    url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'gal-2',
+    title: 'Suite Diplomatique & Balcon',
+    category: 'Chambres',
+    url: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'gal-3',
+    title: 'La Cave - Espace Dégustation Privé',
+    category: 'Cave',
+    url: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'gal-4',
+    title: 'Salon Lounge & Bar intimiste',
+    category: 'Lounge',
+    url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'gal-5',
+    title: 'Chambre Supérieure Privilège',
+    category: 'Chambres',
+    url: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'gal-6',
+    title: 'Conservation d\'exception et crus précieux',
+    category: 'Cave',
+    url: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1200&q=80',
+  }
+];
