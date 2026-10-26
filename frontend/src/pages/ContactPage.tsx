@@ -11,6 +11,7 @@ export const ContactPage: React.FC = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [sentSuccess, setSentSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -28,29 +29,32 @@ export const ContactPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setSentSuccess(false);
     setLoading(true);
 
     try {
-      await fetch(`${API_BASE_URL}/api/contact`, {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName, email, phone, subject, message }),
       });
-    } catch (err) {
-      // Enregistrement de secours local
-      const existing = JSON.parse(localStorage.getItem('corneille_messages') || '[]');
-      localStorage.setItem('corneille_messages', JSON.stringify([
-        { fullName, email, phone, subject, message, date: new Date().toISOString() },
-        ...existing
-      ]));
-    } finally {
-      setLoading(false);
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        setError(data?.error || "Votre message n'a pas pu être transmis. Veuillez réessayer.");
+        return;
+      }
+
       setSentSuccess(true);
       setFullName('');
       setEmail('');
       setPhone('');
       setSubject('');
       setMessage('');
+    } catch {
+      setError("Impossible de joindre le serveur. Votre message n'a pas été transmis.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,6 +165,11 @@ export const ContactPage: React.FC = () => {
               <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 text-sm flex items-center space-x-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 <span>Votre message a été transmis avec succès à la réception de l'hôtel.</span>
+              </div>
+            )}
+            {error && (
+              <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">
+                {error}
               </div>
             )}
 

@@ -136,12 +136,11 @@ export const ReservationPage: React.FC = () => {
         addReservation(savedBooking);
         setSubmittedBooking(savedBooking);
       } else {
-        addReservation(newBookingData);
-        setSubmittedBooking(newBookingData);
+        const data = await res.json().catch(() => null);
+        setErrorMsg(data?.error || "Votre demande n'a pas pu être transmise. Veuillez réessayer.");
       }
-    } catch (err) {
-      addReservation(newBookingData);
-      setSubmittedBooking(newBookingData);
+    } catch {
+      setErrorMsg("Impossible de joindre le serveur. Votre demande n'a pas été enregistrée.");
     } finally {
       setLoading(false);
     }

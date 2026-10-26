@@ -3,6 +3,64 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Calendar, Clock, Compass, ShieldCheck } from 'lucide-react';
 import { getActiveSettings, DATA_UPDATED_EVENT } from '../services/dataService';
 
+const socialLinks = [
+  {
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@corneilleatc?_r=1&_t=ZS-9AnYqJbWsLe',
+    icon: (
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.3 0 .59.05.86.14V9.38a6.4 6.4 0 0 0-.86-.06A6.36 6.36 0 0 0 3.11 15.7a6.36 6.36 0 0 0 6.36 6.36 6.36 6.36 0 0 0 6.36-6.36V9.14a8.2 8.2 0 0 0 4.8 1.55V7.24a4.85 4.85 0 0 1-1.04-.55Z" />
+    ),
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/chez_les_corneilles_hotel?utm_source=qr',
+    icon: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="18" cy="6" r="0.8" fill="currentColor" stroke="none" />
+      </>
+    ),
+  },
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/share/1Dexdpqmt5/?mibextid=wwXIfr',
+    icon: (
+      <path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5v3.1h2.8v8h3.2Z" />
+    ),
+  },
+];
+
+const SocialLinks: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div className={`flex items-center gap-2 ${className}`} aria-label="Réseaux sociaux">
+    {socialLinks.map(({ label, href, icon }) => (
+      <a
+        key={label}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Suivez-nous sur ${label}`}
+        title={label}
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-[#c5a059]/35 text-[#e5c583] transition-colors hover:border-[#e5c583] hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e5c583]"
+      >
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          viewBox="0 0 24 24"
+          className="h-3.5 w-3.5"
+          fill={label === 'Instagram' ? 'none' : 'currentColor'}
+          stroke={label === 'Instagram' ? 'currentColor' : 'none'}
+          strokeWidth={label === 'Instagram' ? 1.8 : undefined}
+          strokeLinecap={label === 'Instagram' ? 'round' : undefined}
+          strokeLinejoin={label === 'Instagram' ? 'round' : undefined}
+        >
+          {icon}
+        </svg>
+      </a>
+    ))}
+  </div>
+);
+
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [siteSettings, setSiteSettings] = useState(getActiveSettings);
@@ -59,6 +117,7 @@ export const Header: React.FC = () => {
               <Phone className="w-3 h-3 mr-1.5 text-[#c5a059]" />
               <span>{siteSettings.phone}</span>
             </a>
+            <SocialLinks className="gap-1" />
             <Link
               to="/admin/login"
               className="hidden md:inline-flex items-center text-slate-400 hover:text-white transition-colors text-[10px] uppercase tracking-wider"

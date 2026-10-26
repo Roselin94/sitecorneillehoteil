@@ -16,33 +16,26 @@ export const AdminLoginPage: React.FC = () => {
     setLoading(true);
 
     try {
-      // Tentative de connexion via API si disponible
       const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        localStorage.setItem('corneille_token', data.token);
-        localStorage.setItem('corneille_admin_user', JSON.stringify(data.user));
-        navigate('/admin/dashboard');
+      if (!res.ok) {
+        setError('Identifiants incorrects. Veuillez vérifier votre adresse e-mail et votre mot de passe.');
         return;
       }
-    } catch (err) {
-      // Mode secours si le backend est encore en configuration
-    }
 
-    // Identifiants par défaut pour initialisation sécurisée
-    if ((email === 'admin@corneillehotel.cg' || email === 'admin') && password === 'Corneille2026!') {
-      localStorage.setItem('corneille_token', 'local_jwt_session_token_corneille');
-      localStorage.setItem('corneille_admin_user', JSON.stringify({ email, role: 'ADMIN', name: 'Responsable Hôtel' }));
+      const data = await res.json();
+      localStorage.setItem('corneille_token', data.token);
+      localStorage.setItem('corneille_admin_user', JSON.stringify(data.user));
       navigate('/admin/dashboard');
-    } else {
-      setError('Identifiants incorrects. Veuillez vérifier votre adresse e-mail et votre mot de passe.');
+    } catch {
+      setError("Impossible de joindre le serveur. Veuillez réessayer plus tard.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -113,13 +106,6 @@ export const AdminLoginPage: React.FC = () => {
             <span>{loading ? 'Connexion en cours...' : 'Se connecter'}</span>
           </button>
         </form>
-
-        <div className="mt-8 pt-4 border-t border-white/10 text-center">
-          <p className="text-[11px] text-slate-400">
-            Identifiants provisoires d'initialisation : <br />
-            <span className="text-white font-mono">admin@corneillehotel.cg</span> / <span className="text-white font-mono">Corneille2026!</span>
-          </p>
-        </div>
       </div>
     </div>
   );

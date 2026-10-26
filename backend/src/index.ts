@@ -9,7 +9,16 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || 'corneille_hotel_secret_key_pointe_noire_2026';
+const JWT_SECRET = process.env.JWT_SECRET;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  throw new Error('JWT_SECRET doit être défini et contenir au moins 32 caractères.');
+}
+if (!ADMIN_EMAIL || !ADMIN_PASSWORD || ADMIN_PASSWORD.length < 12) {
+  throw new Error('ADMIN_EMAIL et ADMIN_PASSWORD (12 caractères minimum) doivent être définis.');
+}
 
 app.use(cors({
   origin: '*',
@@ -76,8 +85,7 @@ const authenticateAdmin = (req: Request, res: Response, next: NextFunction): voi
 app.post('/api/auth/login', async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
 
-  // Compte responsable initialement configuré
-  if ((email === 'admin@corneillehotel.cg' || email === 'admin') && password === 'Corneille2026!') {
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
     const token = jwt.sign(
       { email, role: 'ADMIN', name: 'Responsable Corneille Hôtel & Cave' },
       JWT_SECRET,

@@ -63,10 +63,9 @@ Accédez au site dans votre navigateur : **`http://localhost:5173`**
 
 ---
 
-## 🔐 Identifiants par défaut pour l'Administration
-- **URL** : `http://localhost:5173/admin/login`
-- **E-mail** : `admin@corneillehotel.cg`
-- **Mot de passe** : `Corneille2026!`
+## 🔐 Configuration de l'Administration
+
+Aucun identifiant administrateur par défaut n'est fourni. Configurez `ADMIN_EMAIL`, `ADMIN_PASSWORD` (12 caractères minimum) et `JWT_SECRET` (32 caractères minimum) dans les variables d'environnement du backend. Pour un lancement local, copiez `backend/.env.example` vers `backend/.env` et remplacez les valeurs d'exemple par des secrets personnels.
 
 ---
 
@@ -88,3 +87,11 @@ node "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run prisma:migrat
 1. **Aucun paiement en ligne direct** : toute demande reste **« En attente de confirmation »** avec une référence unique (ex: `CNH-765161`).
 2. Le responsable de l'hôtel contrôle la conformité des dates et appelle le client pour valider.
 3. Le système vérifie côté serveur et refuse toute tentative de double réservation lors de la confirmation manuelle.
+
+---
+
+## 🚂 Déploiement sur Railway
+
+Le dépôt est préparé pour Railway avec deux services (frontend et API). Consultez le [guide de déploiement Railway](./RAILWAY.md) pour configurer les répertoires racines, les variables d'environnement et les contrôles de santé.
+
+**Important :** les routes de réservation et de contact utilisent actuellement la mémoire du serveur, et les données du site sont conservées dans le navigateur. Elles ne sont pas encore persistées dans MySQL ; consultez les limites et précautions du guide avant toute mise en production.

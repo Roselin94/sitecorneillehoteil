@@ -7,13 +7,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "sirv dist --single --host 0.0.0.0"
   },
   "dependencies": {
     "lucide-react": "^1.59.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "react-router-dom": "^7.18.4"
+    "react-router-dom": "^7.18.4",
+    "sirv-cli": "^3.0.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
